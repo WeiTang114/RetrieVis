@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div class="querylist">
+    {% for file in res_files %}
+        <div>
+            <a href="results/{{ file }}">
+            {{ file }}
+            </a>
+        </div>
+    {% endfor %}
+    </div> 
+</body>
+</html>

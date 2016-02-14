@@ -1,0 +1,8 @@
+sample/images/queries/two.png
+
+sample/images/results/two_1.png
+sample/images/results/two_2.png
+sample/images/results/one_1.png
+sample/images/results/one_2.png
+sample/images/results/three_1.png
+sample/images/results/three_2.png

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    .queryimg {
+        width: 200px;
+        height: 200px;
+    }
+    .resultimg {
+        width:200px;
+        height:200px;
+    }
+    </style>
+</head>
+<body>
+    <div>
+        <img class="queryimg" src="image/{{ queryimg }}">
+    </div>
+    <div>
+    {% for img in res_imgs %}
+        <img class="resultimg" src="image/{{ img }}">
+    {% endfor %}
+    </div>
+</body>
+</html>
