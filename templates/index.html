@@ -14,7 +14,7 @@
         </h1>
         <div class="querylist list-group">
         {% for file in res_files %}
-            <a class="list-group-item" href="results/{{ file }}">
+            <a class="list-group-item" href="results?resultfile={{ file }}">
                 {{ file }}
             </a>
         {% endfor %}

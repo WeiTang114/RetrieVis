@@ -24,8 +24,9 @@ def get_image():
     ext = imgpath.split('.')[-1] or 'png' # default type as png
     return send_file(imgpath, mimetype='image/'+ext)
 
-@app.route('/results/<path:res_file>')
-def show_results(res_file):
+@app.route('/results')
+def show_results():
+    res_file = request.args.get('resultfile')
     print res_file
     queryimg, res_imgs = parse_resfile(res_file)
     return render_template('results.html', queryimg=queryimg, res_imgs=res_imgs)
