@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, request
 from sys import argv
 from flask import request, render_template, flash, redirect, \
     url_for, Blueprint, g, Flask
@@ -17,9 +17,10 @@ def index():
     res_files = [os.path.basename(f) for f in res_paths]
     return render_template('index.html', res_files=res_files)
  
-@app.route('/results/image/<path:imgpath>')
-@app.route('/image/<path:imgpath>')
-def get_image(imgpath):
+@app.route('/results/image')
+@app.route('/image')
+def get_image():
+    imgpath = request.args.get('file')
     ext = imgpath.split('.')[-1] or 'png' # default type as png
     return send_file(imgpath, mimetype='image/'+ext)
 

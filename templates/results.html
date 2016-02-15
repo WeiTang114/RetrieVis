@@ -16,11 +16,11 @@
 </head>
 <body>
     <div>
-        <img class="queryimg" src="image/{{ queryimg }}">
+        <img class="queryimg" src="image?file={{ queryimg }}">
     </div>
     <div>
     {% for img in res_imgs %}
-        <img class="resultimg" src="image/{{ img }}">
+        <img class="resultimg" src="image?file={{ img }}">
     {% endfor %}
     </div>
 </body>
