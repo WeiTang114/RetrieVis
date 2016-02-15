@@ -3,25 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
     <style type="text/css">
+    .queryimgbox {
+        text-align: center;
+        margin-top: 40px;
+    }
+    .resultimgbox {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
+        text-align: center;
+    }
     .queryimg {
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
     }
     .resultimg {
-        width:200px;
-        height:200px;
+        width:100px;
+        height:100px;
     }
     </style>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
-        <img class="queryimg" src="image?file={{ queryimg }}">
-    </div>
-    <div>
-    {% for img in res_imgs %}
-        <img class="resultimg" src="image?file={{ img }}">
-    {% endfor %}
+    <div class="container">
+        <div class="queryimgbox">
+            <img class="queryimg" src="image?file={{ queryimg }}">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"></h1>
+            </div>
+        {% for img in res_imgs %}
+            <div class="col-lg-1 col-md-2 col-xs-3 thumb resultimgbox">
+                <img class="resultimg" src="image?file={{ img }}">
+            </div>
+        {% endfor %}
+        </div>
     </div>
 </body>
 </html>
