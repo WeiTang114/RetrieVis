@@ -2,17 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>RetrieVis</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="querylist">
-    {% for file in res_files %}
-        <div>
-            <a href="results/{{ file }}">
-            {{ file }}
+    <div class="container">
+        <h1 class="page-header">
+            RetrieVis
+        </h1>
+        <div class="querylist list-group">
+        {% for file in res_files %}
+            <a class="list-group-item" href="results/{{ file }}">
+                {{ file }}
             </a>
-        </div>
-    {% endfor %}
-    </div> 
+        {% endfor %}
+        </div> 
+    </div>
+
 </body>
 </html>
