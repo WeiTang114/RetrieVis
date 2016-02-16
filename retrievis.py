@@ -15,7 +15,7 @@ app.config['RESULT_DIR'] = argv[1]
 @app.route('/')
 def index():
     res_paths = glob(app.config['RESULT_DIR'] + '/*.txt')
-    res_files = sorted([os.path.basename(f) for f in res_paths], key=_get_sortvalue)
+    res_files = sorted([os.path.basename(f) for f in res_paths], key=_get_sortkey)
     return render_template('index.html', res_files=res_files)
  
 
