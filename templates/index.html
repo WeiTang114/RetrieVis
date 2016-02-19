@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+    .querythumb {
+        width: 50px;
+        height: 50px; 
+    }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,12 +21,12 @@
         </h1>
         <div class="querylist list-group">
         {% for file in res_files %}
-            <a class="list-group-item" href="results?resultfile={{ file }}">
-                {{ file }}
-            </a>
+        <a class="list-group-item" href="results?resultfile={{ file }}" data-resultfile="{{ file }}">
+            <img class="querythumb" src="queryimg?resultfile={{ file }}">
+            {{ file }}
+        </a>
         {% endfor %}
         </div> 
     </div>
-
 </body>
 </html>

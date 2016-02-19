@@ -35,12 +35,21 @@ def _get_sortkey(filename):
 
     return [prefix] + numbers
 
+
 @app.route('/results/image')
 @app.route('/image')
 def get_image():
     imgpath = request.args.get('file')
     ext = imgpath.split('.')[-1] or 'png' # default type as png
     return send_file(imgpath, mimetype='image/'+ext)
+
+@app.route('/queryimg')
+def get_queryimg():
+    res_file = request.args.get('resultfile')
+    queryimg = parse_resfile(res_file, want_result=False)
+    ext = queryimg.split('.')[-1] or 'png' # default type as png
+    return send_file(queryimg, mimetype='image/'+ext)
+    
 
 @app.route('/results')
 def show_results():
@@ -49,17 +58,24 @@ def show_results():
     queryimg, res_imgs = parse_resfile(res_file)
     return render_template('results.html', queryimg=queryimg, res_imgs=res_imgs)
 
-def parse_resfile(res_file):
+def parse_resfile(res_file, want_query=True, want_result=True):
     res_file = os.path.join(app.config['RESULT_DIR'], res_file)
 
     with open(res_file, 'r') as f:
-        lines = filter(lambda l: l.strip(), f.readlines())
+        l = f.readline().strip()
+        while not l:
+            l = f.readline().sript()
+        queryimg = l
 
-    queryimg = lines[0]
-    res_imgs = lines[1:]
+        if want_result:
+            res_imgs = filter(lambda l: l.strip(), f.readlines())
 
-    print queryimg
-    return queryimg, res_imgs
+    if want_query and want_result:
+        return queryimg, res_imgs
+    elif want_query:
+        return queryimg
+    elif want_result:
+        return resultimg
 
 
 def flaskrun(app, default_host='0.0.0.0', 
