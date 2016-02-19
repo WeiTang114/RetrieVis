@@ -5,12 +5,13 @@ from flask import request, render_template, flash, redirect, \
 from glob import glob
 import os
 import re
+import argparse
 
-assert len(argv)==2, 'Usage: python retrievis.py <result dir>' 
+# assert len(argv)==2, 'Usage: python retrievis.py <result dir>' 
 
 app = Flask('ForwardMail')
 app.config['LOGFILE'] = './retrievis.log'
-app.config['RESULT_DIR'] = argv[1]
+app.config['RESULT_DIR'] = '' 
 
 @app.route('/')
 def index():
@@ -61,4 +62,44 @@ def parse_resfile(res_file):
     return queryimg, res_imgs
 
 
-app.run('0.0.0.0', debug=True)
+def flaskrun(app, default_host='0.0.0.0', 
+                  default_port='5000'):
+    """
+    Takes a flask.Flask instance and runs it. Parses 
+    command-line flags to configure the app.
+    """
+
+    # Set up the command-line args
+    parser = argparse.ArgumentParser()
+    parser.add_argument('resultdir', metavar='resultdir', 
+                      help='results list directory.')
+    parser.add_argument('-H', '--host',
+                      help='Hostname of the Flask app ' + \
+                           '[default %s]' % default_host,
+                      default=default_host)
+    parser.add_argument('-P', '--port',
+                      help='Port for the Flask app ' + \
+                           '[default %s]' % default_port,
+                      default=default_port)
+
+    # Two args useful for debugging purposes, but 
+    # a bit dangerous so not exposed in the help message.
+    parser.add_argument('-d', '--debug',
+                      action='store_true', dest='debug',
+                      help=argparse.SUPPRESS)
+
+    args = parser.parse_args()
+    
+    if args.resultdir:
+        app.config['RESULT_DIR'] = args.resultdir
+    else:
+        print 'no result dir set!'
+        exit(-1)
+
+    app.run(
+        debug=args.debug,
+        host=args.host,
+        port=int(args.port)
+    )
+
+flaskrun(app)
