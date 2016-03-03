@@ -39,10 +39,15 @@
             </div>
             {% for img in res_imgs %}
                 <div class="col-lg-1 col-md-2 col-xs-3 thumb resultimgbox">
-                    <img class="resultimg" src="image?file={{ img }}">
+                    <img class="resultimg lazy" src="image?file={{ img }}">
                 </div>
             {% endfor %}
         </div>
     </div>
+    <script language="javascript">
+        $(function() {
+            $("img.lazy").lazyload();
+        });
+    </script>
 </body>
 </html>

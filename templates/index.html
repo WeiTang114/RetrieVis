@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.lazyload.js"></script>
 
     <style type="text/css">
     .querythumb {
         width: 50px;
         height: 50px; 
+        margin-right: 5px;
     }
     </style>
 </head>
@@ -22,11 +24,16 @@
         <div class="querylist list-group">
         {% for file in res_files %}
         <a class="list-group-item" href="results?resultfile={{ file }}" data-resultfile="{{ file }}">
-            <img class="querythumb" src="queryimg?resultfile={{ file }}">
+            <img class="querythumb lazy" data-original="queryimg?resultfile={{ file }}">
             {{ file }}
         </a>
         {% endfor %}
         </div> 
     </div>
+    <script language="javascript">
+        $(function() {
+            $("img.lazy").lazyload();
+        });
+    </script>
 </body>
 </html>
