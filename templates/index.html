@@ -17,14 +17,23 @@
     </style>
 </head>
 <body>
+    <script language="javascript">
+        $(function() {
+            $("img.lazy").lazyload();
+        });
+    </script>
     <div class="container">
         <h1 class="page-header">
             RetrieVis
         </h1>
         <div class="querylist list-group">
         {% for file in res_files %}
-        <a class="list-group-item" href="results?resultfile={{ file }}" data-resultfile="{{ file }}">
-            <img class="querythumb lazy" data-original="queryimg?resultfile={{ file }}">
+        <a class="list-group-item" href="results?resultfile={{ file }}" data-resultfile="{{ file }}" target="_blank">
+            {% if loop.index < 20 %}
+                <img class="querythumb" src="queryimg?resultfile={{ file }}">
+            {% else %}
+                <img class="querythumb lazy" data-original="queryimg?resultfile={{ file }}">
+            {% endif %} 
             {{ file }}
         </a>
         {% endfor %}

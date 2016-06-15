@@ -64,7 +64,7 @@ def parse_resfile(res_file, want_query=True, want_result=True):
     with open(res_file, 'r') as f:
         l = f.readline().strip()
         while not l:
-            l = f.readline().sript()
+            l = f.readline().strip()
         queryimg = l
 
         if want_result:
