@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RetrieVis Simple Mode</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.lazyload.js"></script>
+
+    <style type="text/css">
+    .querythumb {
+        width: 50px;
+        height: 50px; 
+        margin-right: 5px;
+    }
+    </style>
+</head>
+<body>
+    <script language="javascript">
+        $(function() {
+            $("img.lazy").lazyload();
+        });
+    </script>
+    <div class="container">
+        <h1 class="page-header">
+            RetrieVis
+        </h1>
+        <div class="querylist list-group">
+        {% for file,results in results %}
+        <a class="list-group-item" href="results?resultfile={{ file }}" data-resultfile="{{ file }}" target="_blank">
+            {% if loop.index < 20 %}
+                <img class="querythumb" src="queryimg?resultfile={{ file }}">
+            {% else %}
+                <img class="querythumb lazy" data-original="queryimg?resultfile={{ file }}">
+            {% endif %} 
+            {{ file }}
+            &nbsp;&nbsp;
+            {% for res in results %}
+                <img class="querythumb lazy" data-original="image?file={{ res }}">
+            {% endfor %}
+        </a>
+        {% endfor %}
+        </div> 
+    </div>
+    <script language="javascript">
+        $(function() {
+            $("img.lazy").lazyload();
+        });
+    </script>
+</body>
+</html>
